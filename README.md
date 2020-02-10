@@ -1,2 +1,2 @@
 # marner
-Silas Marner, the game
+Games
