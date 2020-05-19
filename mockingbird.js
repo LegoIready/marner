@@ -7,9 +7,10 @@ var scene = 0;
 var fov = 0;
 var name = "";
 function preload() {
-    for (let i = 0; i < 1; i++) {
-        mocks[i] = loadImage("mock" + i + ".png");
-    }
+    //for (let i = 0; i < 1; i++) {
+    //    mocks[i] = loadImage("mock" + i + ".png");
+    //}
+    mocks[0] = loadImage("mocktest.png");
 }
 function setup() {
     if (localStorage.key(0)==="save") { saveGame(1); }
@@ -250,6 +251,7 @@ var draw = (function () {
                 break;
             case 1:
                 background(104, 177, 204);
+                image(mocks[0], 0, 0, 800, 600);
                 switch (mouseCase) {
                     case 0:
                         break;
