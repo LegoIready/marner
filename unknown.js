@@ -206,14 +206,19 @@ var draw = (function () {
             case 1:
                 background(10, 15, 53);
                 image(unks[0], 0, bar0, 800, 600);
-                image(unks[1], 0, bar1);
+                image(unks[1], 500, bar1, 205, 205);
                 fill(0, bar2);
                 rect(0, 0, 800, 600);
-                if (bar2 > 0) {
+                if (bar0 > 0 && bar1 < 50 && bar2 > 0 && bar3 === 0) {
                     bar2 -= 1;
-                } else if (bar2 <= 0 && bar0>0 && bar1 < 50) {
-                    bar0 += 1;
-                    bar1 = ((bar1*1000)+125)/1000;
+                } else if (bar0 > 0 && bar1 < 50 && bar2 <= 0) {
+                    bar0 -= 1;
+                    bar1 = ((bar1 * 1000) + 125) / 1000;
+                } else if (bar0 <= 0 && bar1 >= 50 && bar2 < 255) {
+                    bar2 += 1;
+                }
+                if (bar2 <= 0) {
+                    bar3 = 1;
                 }
                 break;
         }
