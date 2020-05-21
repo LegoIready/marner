@@ -7,7 +7,7 @@ var scene = 0;
 var fov = 0;
 var name = "";
 function preload() {
-    for (let i = 0; i < 1; i++) {
+    for (let i = 0; i < 3; i++) {
         unks[i] = loadImage("unk" + i + ".png");
     }
 }
@@ -148,20 +148,77 @@ function choices(msg, scn, msc, sender) {
     }
 }
 var draw = (function () {
-    var bar0 = 255;
+    var bar0 = 0;
     var bar1 = 0;
-    var bar2 = 0;
+    var bar2 = 255;
     var bar3 = 0;
     var bar4 = 0;
     var bar5 = 0;
     return function () {
         switch (scene) {
             case 0:
+                background(0);
+                textSize(50);
+                fill(255,bar0);
+                text("INTO THE UNKNOWN", 150, 300);
+                textSize(20);
+                if (bar0 < 255) {
+                    bar0 += 1;
+                }
                 switch (mouseCase) {
                     case 0:
+                        mousePressed = function () {
+                            mouseCase += 1;
+                        }
                         break;
+                    case 1:
+                        keyPressed = function () {
+                            if (((keyCode >= 65 && keyCode <= 90) || keyCode === 32) && name.length < 8) {
+                                name += key;
+                            } else if (keyCode === BACKSPACE && name.length > 0) {
+                                name = name.slice(0, -1);
+                            } else if (keyCode === ENTER && name.length > 0) {
+                                mouseCase += 1;
+                            }
+                            return false;
+                        }
+                        textFont("Courier New");
+                        textSize(20);
+                        fill(42, 0, 54);
+                        rect(20, 495, 760, 90);
+                        fill(58, 0, 74);
+                        rect(15, 500, 770, 80);
+                        fill(255);
+                        text("Enter your name (up to 8 characters):\n" + name, 30, 520);
+                        break;
+                    case 2:
+                        fill(0, bar1);
+                        rect(0, 0, 800, 600);
+                        if (bar1 < 255) {
+                            bar1 += 1;
+                        } else {
+                            bar0 = 400;
+                            bar1 = 0;
+                            scene += 1;
+                        }
                 }
-		break;
+                break;
+            case 1:
+                background(10, 15, 53);
+                image(unks[0], 0, bar0, 800, 600);
+                image(unks[1], 0, bar1);
+                fill(0, bar2);
+                rect(0, 0, 800, 600);
+                if (bar2 > 0) {
+                    bar2 -= 1;
+                } else if (bar2 <= 0 && bar0>0 && bar1 < 50) {
+                    bar0 += 1;
+                    bar1 = ((bar1*1000)+125)/1000;
+                }
+                break;
+        }
+        if (mouseIsPressed) {
+            console.log(mouseX + "," + mouseY);
         }
     }
 })();
