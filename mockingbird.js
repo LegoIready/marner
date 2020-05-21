@@ -7,16 +7,16 @@ var scene = 0;
 var fov = 0;
 var name = "";
 function preload() {
-    //for (let i = 0; i < 1; i++) {
-    //    mocks[i] = loadImage("mock" + i + ".png");
-    //}
-    mocks[0] = loadImage("mocktest.png");
+    for (let i = 0; i < 1; i++) {
+        mocks[i] = loadImage("mock" + i + ".png");
+    }
 }
 function setup() {
     if (localStorage.key(0)==="save") { saveGame(1); }
     setInterval(saveGame, 30000, 0);
     createCanvas(800, 600);
     document.getElementsByTagName("canvas")[0].insertAdjacentHTML("afterend", '<br><input id="savelog"><button onclick="saveGame(2)">SAVE</button><button onclick="saveGame(3)">LOAD</button><button onclick="saveGame(4)">RESET</button>');
+    noSmooth();
     noStroke();
     textFont("Courier New");
     textSize(20);
