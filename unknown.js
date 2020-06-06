@@ -150,7 +150,7 @@ function choices(msg, scn, msc, sender) {
 }
 var draw = (function () {
     var bar0 = 0;
-    var bar1 = 0;
+    var bar1 = 50;
     var bar2 = 255;
     var bar3 = 0;
     var bar4 = "UNKNOWN OBBYS PRESENTS";
@@ -159,10 +159,10 @@ var draw = (function () {
         switch (scene) {
             case 0:
                 background(0);
-                textSize(50);
+                textSize(bar1);
                 fill(255, bar0);
                 rectMode(CENTER);
-                text(bar4, 150, 300);
+                text(bar4, 0, 300);
                 textSize(20);
                 if (bar5 === 0) {
                     if (bar0 < 255) {
@@ -230,6 +230,7 @@ var draw = (function () {
                                 bar0 -= 1;
                             } else {
                                 bar0 = 400;
+                                bar1 = 0;
                                 scene += 1;
                             }
                             break;
