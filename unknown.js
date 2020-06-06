@@ -63,6 +63,7 @@ function saveGame(man) {
             break;
     }
 }
+
 function dialogue(msg, scn, msc, sender) {
     textFont("Courier New");
     textSize(20);
@@ -152,55 +153,87 @@ var draw = (function () {
     var bar1 = 0;
     var bar2 = 255;
     var bar3 = 0;
-    var bar4 = 0;
+    var bar4 = "UNKNOWN OBBYS PRESENTS";
     var bar5 = 0;
     return function () {
         switch (scene) {
             case 0:
                 background(0);
                 textSize(50);
-                fill(255,bar0);
-                text("INTO THE UNKNOWN", 150, 300);
+                fill(255, bar0);
+                rectMode(CENTER);
+                text(bar4, 150, 300);
                 textSize(20);
-                if (bar0 < 255) {
-                    bar0 += 1;
+                if (bar5 === 0) {
+                    if (bar0 < 255) {
+                        bar0 += 1;
+                    } else if (bar0 >= 255) {
+                        bar5 = 1;
+                    }
+                } else if (bar5 === 1) {
+                    if (bar0 > 0) {
+                        bar0 -= 1;
+                    } else if (bar0 <= 0) {
+                        bar5 = 2;
+                        bar4 = "IN COLLABORATION WITH LEGO_IREADY";
+                    }
+                } else if (bar5 === 2) {
+                    if (bar0 < 255) {
+                        bar0 += 1;
+                    } else if (bar0 >= 255) {
+                        bar5 = 3;
+                    }
+                } else if (bar5 === 3) {
+                    if (bar0 > 0) {
+                        bar0 -= 1;
+                    } else if (bar0 <= 0) {
+                        bar5 = 4;
+                        bar4 = "INTO THE UNKNOWN";
+                    }
+                } else if (bar5 === 4) {
+                    if (bar0 < 255) {
+                        bar0 += 1;
+                    }
                 }
-                switch (mouseCase) {
-                    case 0:
-                        mousePressed = function () {
-                            mouseCase += 1;
-                        }
-                        break;
-                    case 1:
-                        keyPressed = function () {
-                            if (((keyCode >= 65 && keyCode <= 90) || keyCode === 32) && name.length < 8) {
-                                name += key;
-                            } else if (keyCode === BACKSPACE && name.length > 0) {
-                                name = name.slice(0, -1);
-                            } else if (keyCode === ENTER && name.length > 0) {
+                rectMode(CORNER);
+                if (bar5 === 4) {
+                    switch (mouseCase) {
+                        case 0:
+                            mousePressed = function () {
                                 mouseCase += 1;
                             }
-                            return false;
-                        }
-                        textFont("Courier New");
-                        textSize(20);
-                        fill(42, 0, 54);
-                        rect(20, 495, 760, 90);
-                        fill(58, 0, 74);
-                        rect(15, 500, 770, 80);
-                        fill(255);
-                        text("Enter your name (up to 8 characters):\n" + name, 30, 520);
-                        break;
-                    case 2:
-                        fill(0, bar1);
-                        rect(0, 0, 800, 600);
-                        if (bar1 < 255) {
-                            bar1 += 1;
-                        } else {
-                            bar0 = 400;
-                            bar1 = 0;
-                            scene += 1;
-                        }
+                            break;
+                        case 1:
+                            keyPressed = function () {
+                                if (((keyCode >= 65 && keyCode <= 90) || keyCode === 32) && name.length < 8) {
+                                    name += key;
+                                } else if (keyCode === BACKSPACE && name.length > 0) {
+                                    name = name.slice(0, -1);
+                                } else if (keyCode === ENTER && name.length > 0) {
+                                    mouseCase += 1;
+                                }
+                                return false;
+                            }
+                            textFont("Courier New");
+                            textSize(20);
+                            fill(42, 0, 54);
+                            rect(20, 495, 760, 90);
+                            fill(58, 0, 74);
+                            rect(15, 500, 770, 80);
+                            fill(255);
+                            text("Enter your name (up to 8 characters):\n" + name, 30, 520);
+                            break;
+                        case 2:
+                            fill(0, bar1);
+                            rect(0, 0, 800, 600);
+                            if (bar0 > 0 && bar5 === 4) {
+                                bar0 -= 1;
+                            } else {
+                                bar0 = 400;
+                                scene += 1;
+                            }
+                            break;
+                    }
                 }
                 break;
             case 1:
