@@ -161,8 +161,8 @@ var draw = (function () {
                 background(0);
                 textSize(bar1);
                 fill(255, bar0);
-                rectMode(CENTER);
-                text(bar4, 0, 300);
+                textAlign(CENTER);
+                text(bar4, 400, 300);
                 textSize(20);
                 if (bar5 === 0) {
                     if (bar0 < 255) {
@@ -195,7 +195,7 @@ var draw = (function () {
                         bar0 += 1;
                     }
                 }
-                rectMode(CORNER);
+                textAlign(LEFT);
                 if (bar5 === 4) {
                     switch (mouseCase) {
                         case 0:
