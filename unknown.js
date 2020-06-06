@@ -233,6 +233,8 @@ var draw = (function () {
                             } else {
                                 bar0 = 400;
                                 bar1 = 0;
+                                bar2 = 255;
+                                bar3 = 0;
                                 scene += 1;
                             }
                             break;
