@@ -175,6 +175,7 @@ var draw = (function () {
                         bar0 -= 1;
                     } else if (bar0 <= 0) {
                         bar5 = 2;
+                        bar1 = 40;
                         bar4 = "IN COLLABORATION WITH LEGO_IREADY";
                     }
                 } else if (bar5 === 2) {
@@ -188,6 +189,7 @@ var draw = (function () {
                         bar0 -= 1;
                     } else if (bar0 <= 0) {
                         bar5 = 4;
+                        bar1 = 60;
                         bar4 = "INTO THE UNKNOWN";
                     }
                 } else if (bar5 === 4) {
